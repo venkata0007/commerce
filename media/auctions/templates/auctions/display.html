@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+<!-- alert -->
+{% block body %}
+    <div class="alert alert-success" role="alert">
+        {{ message }};
+    </div>
+    <h2>{{ message }}</h2>
+    <h2>Title: {{ object.title }}</h2>
+    <p><img src="{{ object.image.url }}" alt="{{ object.title }}" style="width: 300px; height: 300px;"></p>
+    <p>Description: {{ object.description }}</p>
+    <p>Category: {{ object.category }}</p>
+    <p>Seller :{{object.user}} </p>
+    <p>Starting bid: ${{ object.starting_bid }}</p>
+    <p>Highest bid: ${{ object.highest_bid }}</p>
+    <a href="{% url 'bid' object.custom_id %}" >Bid</a>
+    <p>Active: {{ object.active }}</p>
+    {% if is_a_bid %}
+        <form action="{% url 'bid' object.custom_id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="bid" placeholder="Bid Amount">
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+    <p>Ends on: {{object.end_time}}</p>
+    <a href="{% url 'update_listing' listing_id=object.custom_id %}">Update</a>
+
+    <h3>History</h3>
+    <ul>
+        {% for bid in object.bids.all %}
+            <li>{{ bid.user }} bid ${{ bid.amount }} on {{ bid.time }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

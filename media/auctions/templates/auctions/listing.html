@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div class="alert alert-success" role="alert">
+        Hi, {{ user.username }}!
+    </div>
+    <h2>Active Listings</h2>
+    <ul>
+        {% for listing in listings %}
+            <li>
+                <!-- <p><img src="{{ listing.image.url }}" alt="{{ listing.title }}" style="width: 200px; height: 200px;"></p> -->
+                <a href="{% url 'listing' listing.custom_id %}">{{ listing.title }}</a>
+                <span class="badge badge-primary">{{ listing.price }}</span>
+                <span class="badge badge-secondary">{{ listing.category }}</span>
+                <span class="badge badge-info">{{ listing.created }}</span>
+            </li>
+        {% endfor %}
+{% endblock %}

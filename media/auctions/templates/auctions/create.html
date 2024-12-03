@@ -1,0 +1,52 @@
+<!-- CHOICES = [
+    ("Fashion", "Fashion"),
+    ("Toys", "Toys"),
+    ("Electronics", "Electronics"),
+    ("Home", "Home"),
+    ("Other", "Other")
+] -->
+
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Create Listing</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'create' %}" method="post">
+        {% csrf_token %}
+        <!-- title,descn,image -->
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="description" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <input autofocus class="form-control" type="file" name="image" placeholder="Upload_Image">
+        </div>
+        <div class="form-group">
+            <!-- <input autofocus class="form-control" type="text" name="category" list="cateogories" placeholder="Category"/> -->
+            <select name="category" id="category">
+                <datalist id="cateogories">
+                <option value="Fashion">Fashion</option>
+                <option value="Toys">Toys</option>
+                <option value = "Electronics">Electronics</option>
+                <option value = "Home">Home</option>
+                </datalist>
+            </select>
+        </div>
+        <div class="form-group">
+            <input autofocus class="form-control" type="number" name="price" placeholder="Starting Price">
+        </div>
+
+        <!-- <input type="hidden" name="user" value="{{ user.id }}"> -->
+        <input class="btn btn-primary" type="submit" value="Add">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+    <h2>Title: {{ object.title }}</h2>
+    <p><img src="{{ object.image.url }}" alt="{{ object.title }}" style="width: 300px; height: 300px;"></p>
+    <p>Description: {{ object.description }}</p>
+    <p>Category: {{ object.category }}</p>
+    <p>Seller: {{ object.user }}</p>
+    <p>Starting Bid: ${{ object.starting_bid }}</p>
+    <p>Highest Bid: ${{ object.highest_bid }}</p>
+    <p>Active: {{ object.active }}</p>
+    <a href="{% url 'update_listing' object.custom_id %}">Update</a>
+
+    <form action="{% url 'bid' object.custom_id %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="bid" placeholder="Bid Amount">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
