@@ -2,11 +2,6 @@
   "version": 2,
   "builds": [
     {
-          "engines": {
-          "node": "18.x"
-        }
-    },
-    {
       "src": "build_files.sh",
       "use": "@vercel/static-build",
       "config": {
