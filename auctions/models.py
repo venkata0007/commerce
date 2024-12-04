@@ -6,6 +6,7 @@ from datetime import timedelta
 
 
 class User(AbstractUser):
+    
     pass
 def default_end_time():
     return timezone.now() + timedelta(days=7)
