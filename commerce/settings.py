@@ -84,7 +84,7 @@ import os
 
 if os.getenv("VERCEL"):
     DEBUG = False
-    ALLOWED_HOSTS = ["vercel.app"]
+    ALLOWED_HOSTS = ["vercel.app",'.now.sh']
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
